@@ -4,10 +4,12 @@
 A C++11 application that mimics the functionality of a coffee vending machine. Provides the means of ordering one or more customizable cups of coffee, providing payment, receiving change, and dispensing the correct product.
 
 ## Assumptions and Constraints
-- Compiles on build.particle.io (you will need to create a free account to make this work). Note that you DO NOT need to buy a Particle device as part of this exercise - the goal is to write a firmware application against the Particle APIs as documented).
+- Compiles on build.particle.io (you will need to create a free account to make this work). Note that you DO NOT need to buy a Particle device as part of this exercise - the goal is to write a firmware application against the Particle [Cloud](https://docs.particle.io/reference/api/) and [Firmware](https://docs.particle.io/reference/firmware/electron/) APIs as documented).
 - Receives input via messages sent to the device via the Particle event messaging system (the device must subscribe to these events as part of its initialization with Particle.subscribe()).
-- Returns output via messages sent to the Particle cloud via Particle.publish(). Note that  all messages sent over Particle.publish() and Particle.subscribe() can be up to 255 bytes in size!
+- Returns output via messages sent to the Particle cloud via Particle.publish(). Note that  all messages sent over [Particle.publish()](https://docs.particle.io/reference/firmware/electron/#particle-publish-) and [Particle.subscribe()](https://docs.particle.io/reference/firmware/electron/#particle-subscribe-) can be up to 255 bytes in size!
 - Does not depend on any external web services other than Particle.io for input/output as described above.
+- Runs in Automatic device mode - you do not need to be responsible for managing device connectivity. You can assume that while your firmware is running, the device has a connection to the cloud.
+- All communications with the cloud succeed.
 - Does not require any persistent data storage - any partially-complete transactions during a device reboot (e.g. power cycle) should be discarded.
 - Only manages 1 coffee order at once. You can assume whatever physical apparatus is connected to the other end of this service prevents more than 1 user from using it at once.
 
