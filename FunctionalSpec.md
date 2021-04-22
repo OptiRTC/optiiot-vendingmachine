@@ -50,24 +50,28 @@ A C++11 application that mimics the functionality of a coffee vending machine. P
       and `625` respectively, then the expected output is `Order: 1S 2M 3L, Funds: 625`.
       Note: `currFunds` in this examples is less than funds required for order.
 - When money is added,
-   - display message of added value and accumulated `curFunds` on LCD using `setLCD`
-   - send message for `curFunds`
+   - first display message of added value and accumulated `curFunds` on LCD using `setLCD`
+   - then send message for `curFunds`
 - When coffee is added
-   - display message on LCD showing the 3 sizes of coffee and their counts using `setLCD`
-   - send message for `order`
+   - first display message on LCD showing the 3 sizes of coffee and their counts using `setLCD`
+   - then send message for `order`
 - When dispense is triggered and there are insufficient funds:
-   - display human readable insufficient funds message on LCD
-   - send message for `insFunds`
+   - first display human readable insufficient funds message on LCD
+   - then send message for `insFunds`
 - When dispense is triggered and there are sufficient funds:
-   - display `receipt` messaged on LCD by sending `setLCD` message
-   - send messages for `receipt`, `order`, `refund`,
-   - send messages for `curFunds` and `order` (reset their values)
-   - wait 3 seconds then reset LCD to start up display message (message of the day)
+   - first display `receipt` messaged on LCD by sending `setLCD` message
+   - then send messages for `receipt`, `order`, `refund` (in this order)
+   - then reset state for `currFunds` and `order`
+   - then send messages for `curFunds` and `order` (in this order)
+   - then wait 3 seconds
+   - then reset LCD to start up display message (message of the day)
 - When cancel is triggered:
-   - display `refund` messaged on LCD by sending `setLCD` message
-   - send message for `cancel` and `refund`
-   - send messages for `curFunds` and `order` (reset their values)
-   - wait 3 seconds and reset LCD to start up display message (message of the day)
+   - first display `refund` messaged on LCD by sending `setLCD` message
+   - then send message for `cancel` and `refund` (in this order)
+   - then reset state for `currFunds` and `order`
+   - then send messages for `curFunds` and `order` (in this order)
+   - then wait 3 seconds
+   - then reset LCD to start up display message (message of the day)
 - `uint16_t` & `uint32_t` are little endian in messages sent and received
 - Assume device hardware is little endian
 
