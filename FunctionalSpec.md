@@ -76,7 +76,7 @@ Messages sent by device:
 - `setLCD`: Specifies LCD display message. Payload is ASCII string.
 - `curFunds`: Specifies the accumulated money inserted. Payload is Int32 representing value in cents
 - `order`: Specifies number of small, medium and large coffees respectively. Payload is 3 Int32 values in sequence of small, medium and large coffees.
-- `insFunds`: Send when dispense is triggered and there is insufficient funds for coffees in order.
+- `insFunds`: Sent when dispense is triggered and there is insufficient funds for coffees in order.
 - `receipt`: Sent when dispense is triggered and there is sufficient funds for coffees in order. Payload is human readable summary of order. Include coffee counts, subtotals, total, and refund.
 - `cancel`: Sent when cancel is triggered. No payload
 - `refund`: Specifies refund after dispense or cancel is triggered. Payload is Int32 specifiying value in cents.
