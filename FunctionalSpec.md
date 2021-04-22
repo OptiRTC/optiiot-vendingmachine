@@ -30,6 +30,10 @@ A C++11 application that mimics the functionality of a coffee vending machine. P
 - Dispense/Cancel Button GPIO Pin A3
    - Dispense will be triggered by press & release
    - Cancel will be triggered by press & hold > 2 seconds
+- Initialized state values (before messages arrive by Serial):
+  - `msgDay = '' //empty ASCII string`
+  - `order = {0x0, 0x0, 0x0} // zero small, zero medium, zero large coffees`
+  - `curFunds = 0 //zero cents`
 - Message of the day value to write to LCD using `setLCD` will be evaluated using last received `msgOfDay`
   template value and replacing each occurrence of `%KEY%` with the corresponding value for that
   `KEY` where `KEY` is one of the supported keys excluding `msgOfDay` and `setLCD`.  If `KEY` is
