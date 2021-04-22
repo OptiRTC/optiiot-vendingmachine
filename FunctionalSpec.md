@@ -58,25 +58,28 @@ A C++11 application that mimics the functionality of a coffee vending machine. P
    - send message for `cancel` and `refund`
    - send messages for `curFunds` and `order` (reset their values)
    - wait 3 seconds and reset LCD to start up display message (message of the day)
+- `uint16_t` & `uint32_t` are little endian in messages sent and received
+- Assume device hardware is little endian
 
 ## Opti Vending Machine Message Protocol
 
 - Each serial message is 3 fields:
   - A `KEY` field of 8 bytes
-  - A `VALUESIZE` field of 2 bytes
+    - If `Key` is less than 8 bytes, it will padded with `0x0`
+  - A `VALUESIZE` field of 2 bytes (`uint16_t`)
   - A `VALUE` field of N bytes where N is the number of bytes defined by valueSize
 
 ### Supported Keys:
 
 Messages received by device:
 - `msgOfDay`: Specifies the message of the day template. Payload is ASCII string.
-- `addValue`: Specifies value of money inserted. Payload is Int32 representing value in cents
+- `addValue`: Specifies value of money inserted. Payload is `uint32_t` representing value in cents
 
 Messages sent by device:
 - `setLCD`: Specifies LCD display message. Payload is ASCII string.
-- `curFunds`: Specifies the accumulated money inserted. Payload is Int32 representing value in cents
-- `order`: Specifies number of small, medium and large coffees respectively. Payload is 3 Int32 values in sequence of small, medium and large coffees.
+- `curFunds`: Specifies the accumulated money inserted. Payload is `uint32_t` representing value in cents
+- `order`: Specifies number of small, medium and large coffees respectively. Payload is 3 `uint32_t` values in sequence of small, medium and large coffees.
 - `insFunds`: Sent when dispense is triggered and there is insufficient funds for coffees in order.
 - `receipt`: Sent when dispense is triggered and there is sufficient funds for coffees in order. Payload is human readable summary of order. Include coffee counts, subtotals, total, and refund.
 - `cancel`: Sent when cancel is triggered. No payload. (`VALUESIZE is 0`)
-- `refund`: Specifies refund after dispense or cancel is triggered. Payload is Int32 specifiying value in cents.
+- `refund`: Specifies refund after dispense or cancel is triggered. Payload is `uint32_t` specifiying value in cents.
