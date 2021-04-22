@@ -34,11 +34,21 @@ A C++11 application that mimics the functionality of a coffee vending machine. P
   - `msgDay = '' //empty ASCII string`
   - `order = {0x0, 0x0, 0x0} // zero small, zero medium, zero large coffees`
   - `curFunds = 0 //zero cents`
-- Message of the day value is written to LCD by sending `setLCD` message.  The ASCII string
-  to send with `setLCD` will be evaluated using last received `msgOfDay` template value and
-  replacing each occurrence of `%KEY%` with the corresponding value for that `KEY` where `KEY`
-  is one of the supported keys excluding `msgOfDay` and `setLCD`.  If `KEY` is an unknown key
-  or `msgOfDay` or `setLCD`, then it will not be replaced.
+- Message of the day value is written to LCD by sending `setLCD` message.
+  - The ASCII string to send with `setLCD` will be evaluated using last received `msgOfDay`
+    template value and replacing each occurrence of `%KEY%` with the corresponding value for
+    that `KEY`.
+  - Each `%KEY%` will be matched and replaced left to right
+  - If `KEY` is an unknown key, then it will not be replaced.
+  - Known Keys and corresponding value to render (as base 10 string)
+    - `smallCount`: the count of small coffees in order
+    - `mediumCount`: the count of medium coffees in order
+    - `largeCount`: the count of large coffees in order
+    - `curFunds`: the accumulated money inserted (simply a base 10 string of cents accumulated)
+  - Example: `Order: %smallCount%S %mediumCount%M %largeCount%L, Funds: %curFunds%`.
+    * If `smallCount`, `mediumCount`, `largeCount` and `curFunds` are `1`, `2`, `3`
+      and `625` respectively, then the expected output is `Order: 1S 2M 3L, Funds: 625`.
+      Note: `currFunds` in this examples is less than funds required for order.
 - When money is added,
    - display message of added value and accumulated `curFunds` on LCD using `setLCD`
    - send message for `curFunds`
