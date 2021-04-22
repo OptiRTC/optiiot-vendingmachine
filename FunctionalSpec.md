@@ -20,7 +20,7 @@ A C++11 application that mimics the functionality of a coffee vending machine. P
 - “Dispense” coffee when an order is completed if adequate payment has been provided and display money remaining in payment transaction. The developer can assume that the physical implications of this dispense operation always succeed and do not need to be verified - in this context, "dispense" means complete the order.
 - Insertion of money is communicated to device by serial message
 - Device sends updates to user via events sent via Serial communications
-- At start up display message of the day on LCD
+- At start up, wait for message of the day template and then display message of the day on LCD
 
 ## Implementation Requirements
 
@@ -49,12 +49,12 @@ A C++11 application that mimics the functionality of a coffee vending machine. P
    - display human readable insufficient funds message on LCD
    - send message for `insFunds`
 - When dispense is triggered and there are sufficient funds:
-   - display `receipt` messaged on LCD
+   - display `receipt` messaged on LCD by sending `setLCD` message
    - send messages for `receipt`, `order`, `refund`,
    - send messages for `curFunds` and `order` (reset their values)
-   - wait 3 seconds and reset LCD to start up display message (message of the day)
+   - wait 3 seconds then reset LCD to start up display message (message of the day)
 - When cancel is triggered:
-   - display `refund` message on LCD
+   - display `refund` messaged on LCD by sending `setLCD` message
    - send message for `cancel` and `refund`
    - send messages for `curFunds` and `order` (reset their values)
    - wait 3 seconds and reset LCD to start up display message (message of the day)
@@ -79,7 +79,7 @@ Messages sent by device:
 - `setLCD`: Specifies LCD display message. Payload is ASCII string.
 - `curFunds`: Specifies the accumulated money inserted. Payload is `uint32_t` representing value in cents
 - `order`: Specifies number of small, medium and large coffees respectively. Payload is 3 `uint32_t` values in sequence of small, medium and large coffees.
-- `insFunds`: Sent when dispense is triggered and there is insufficient funds for coffees in order.
+- `insFunds`: Sent when dispense is triggered and there is insufficient funds for coffees in order. No payload. (`VALUESIZE is 0`)
 - `receipt`: Sent when dispense is triggered and there is sufficient funds for coffees in order. Payload is human readable summary of order. Include coffee counts, subtotals, total, and refund.
 - `cancel`: Sent when cancel is triggered. No payload. (`VALUESIZE is 0`)
 - `refund`: Specifies refund after dispense or cancel is triggered. Payload is `uint32_t` specifiying value in cents.
