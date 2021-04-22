@@ -34,10 +34,11 @@ A C++11 application that mimics the functionality of a coffee vending machine. P
   - `msgDay = '' //empty ASCII string`
   - `order = {0x0, 0x0, 0x0} // zero small, zero medium, zero large coffees`
   - `curFunds = 0 //zero cents`
-- Message of the day value to write to LCD using `setLCD` will be evaluated using last received `msgOfDay`
-  template value and replacing each occurrence of `%KEY%` with the corresponding value for that
-  `KEY` where `KEY` is one of the supported keys excluding `msgOfDay` and `setLCD`.  If `KEY` is
-  an unknown key or `msgOfDay` or `setLCD`, then it will not be replaced.
+- Message of the day value is written to LCD by sending `setLCD` message.  The ASCII string
+  to send with `setLCD` will be evaluated using last received `msgOfDay` template value and
+  replacing each occurrence of `%KEY%` with the corresponding value for that `KEY` where `KEY`
+  is one of the supported keys excluding `msgOfDay` and `setLCD`.  If `KEY` is an unknown key
+  or `msgOfDay` or `setLCD`, then it will not be replaced.
 - When money is added,
    - display message of added value and accumulated `curFunds` on LCD using `setLCD`
    - send message for `curFunds`
