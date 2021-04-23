@@ -48,7 +48,7 @@ A C++11 application that mimics the functionality of a coffee vending machine. P
   - Example: `Order: %smallCount%S %mediumCount%M %largeCount%L, Funds: %curFunds%`.
     * If `smallCount`, `mediumCount`, `largeCount` and `curFunds` are `1`, `2`, `3`
       and `625` respectively, then the expected output is `Order: 1S 2M 3L, Funds: 625`.
-      Note: `currFunds` in this examples is less than funds required for order.
+      Note: `curFunds` in this examples is less than funds required for order.
 - When money is added,
    - first display human readable message of added value and accumulated `curFunds` on LCD using `setLCD`
    - then send message for `curFunds`
@@ -61,14 +61,14 @@ A C++11 application that mimics the functionality of a coffee vending machine. P
 - When dispense is triggered and there are sufficient funds:
    - first display human readable receipt message on LCD by sending `setLCD` message
    - then send messages for `receipt`, `order`, `refund` (in this order)
-   - then reset state for `currFunds` and `order`
+   - then reset state for `curFunds` and `order`
    - then send messages for `curFunds` and `order` (in this order)
    - then wait 3 seconds
    - then reset LCD with message of the day (using current `msgOfDay` template)
 - When cancel is triggered:
    - first display human readable refund message on LCD by sending `setLCD` message
    - then send message for `cancel` and `refund` (in this order)
-   - then reset state for `currFunds` and `order`
+   - then reset state for `curFunds` and `order`
    - then send messages for `curFunds` and `order` (in this order)
    - then wait 3 seconds
    - then reset LCD with message of the day (using current `msgOfDay` template)
