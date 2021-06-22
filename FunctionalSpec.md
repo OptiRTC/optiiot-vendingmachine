@@ -11,6 +11,18 @@ A C++11 application that mimics the functionality of a coffee vending machine. P
 - Does not require any persistent data storage.
 - Only manages 1 coffee order at once. One order may consist of multiple coffees of different sizes. You can assume whatever physical apparatus is connected to the other end of this service prevents more than 1 user from using it at once.
 
+## Useful Particle APIs
+
+The following is a list of APIs we anticipate you will need to implement your solution.
+
+- [digitalread()](https://docs.particle.io/cards/firmware/input-output/digitalread/) to read value of a button's pin
+- [millis()](https://docs.particle.io/cards/firmware/time/millis/) to measure time
+- [Serial](https://docs.particle.io/cards/firmware/serial/serial/)
+  - [Serial.begin(9600)](https://docs.particle.io/cards/firmware/serial/begin/) to setup serial connection
+  - [Serial.available()](https://docs.particle.io/cards/firmware/serial/available/)
+    and [Serial.read()](https://docs.particle.io/cards/firmware/serial/read/) to read incoming messages
+  - [Serial.write()](https://docs.particle.io/cards/firmware/serial/write/) to write messages
+
 ## Functional Requirements
 
 - Order coffee in 3 sizes (small for $1.75, medium for $2.00, large for $2.25).
